@@ -1,7 +1,7 @@
 const CreateNFT = () => (
-  <div>
-    CreateNFT
-  </div>
+    <div>
+        CreateNFT
+    </div>
 );
 
 export default CreateNFT;

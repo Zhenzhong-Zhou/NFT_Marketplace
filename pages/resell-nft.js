@@ -1,5 +1,5 @@
 const ResellNFT = () => (
-  <div>Resell NFT</div>
+    <div>Resell NFT</div>
 );
 
 export default ResellNFT;

@@ -1,5 +1,5 @@
 const NFTDetails = () => (
-  <div>NFT Details</div>
+    <div>NFT Details</div>
 );
 
 export default NFTDetails;

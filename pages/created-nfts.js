@@ -1,5 +1,5 @@
 const CreatedNFTs = () => (
-  <div>Created NFTs</div>
+    <div>Created NFTs</div>
 );
 
 export default CreatedNFTs;

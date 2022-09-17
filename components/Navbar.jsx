@@ -1,5 +1,5 @@
 const Navbar = () => (
-  <div>NarBar</div>
+    <div>NarBar</div>
 );
 
 export default Navbar;
