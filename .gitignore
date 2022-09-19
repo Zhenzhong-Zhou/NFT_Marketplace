@@ -43,3 +43,9 @@ next-env.d.ts
 
 #WebStorm
 .idea
+
+coverage
+coverage.json
+typechain
+typechain-types
+.secret
