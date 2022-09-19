@@ -13,7 +13,10 @@ contract NFTMarketplace is ERC721URIStorage {
     Counters.Counter private _tokenIds;
     Counters.Counter private _itemsSold;
 
-    uint256 listingPrice = 0.025 ether;
+    uint256 listingPrice = 20 ether;
+
+    uint256 ownerCommissionPercentage = 15;
+    uint256 creatorCommissionPercentage = 1000 - ownerCommissionPercentage;
 
     address payable owner;
 
@@ -35,8 +38,26 @@ contract NFTMarketplace is ERC721URIStorage {
         bool sold
     );
 
-    constructor() ERC721("Metaverse Tokens", "METT"){
+    constructor() ERC721("Artbyte", "ART"){
         owner = payable(msg.sender);
+    }
+
+    function getOwnerShare(uint256 x) private view returns (uint256) {
+        return (x / 1000) * ownerCommissionPercentage;
+    }
+
+    function getCreatorShare(uint256 x) private view returns (uint256) {
+        return (x / 1000) * creatorCommissionPercentage;
+    }
+
+    function updateOwnerCommissionPercentage(uint _ownerCommissionPercentage) public payable {
+        require(owner == msg.sender, "Only marketplace owner can update the listing price.");
+
+        ownerCommissionPercentage = _ownerCommissionPercentage;
+    }
+
+    function getOwnerCommissionPercentage() public view returns (uint256) {
+        return ownerCommissionPercentage;
     }
 
     function updateListingPrice(uint _listingPrice) public payable {
@@ -51,10 +72,14 @@ contract NFTMarketplace is ERC721URIStorage {
 
     function createToken(string memory tokenURI, uint256 price) public payable returns (uint) {
         _tokenIds.increment();
+
         uint256 newTokenId = _tokenIds.current();
+
         _mint(msg.sender, newTokenId);
         _setTokenURI(newTokenId, tokenURI);
+
         createMarketItem(newTokenId, price);
+
         return newTokenId;
     }
 
@@ -91,8 +116,9 @@ contract NFTMarketplace is ERC721URIStorage {
 
     function createMarketSale(uint256 tokenId) public payable {
         uint price = idToMarketItem[tokenId].price;
+        address payable creator = idToMarketItem[tokenId].seller;
 
-        require(msg.value == price, "Please submit the asking price in order to complete the purchase.");
+        require(msg.value == price, "Please submit the asking price to complete the purchase.");
 
         idToMarketItem[tokenId].owner = payable(msg.sender);
         idToMarketItem[tokenId].sold = true;
@@ -103,7 +129,8 @@ contract NFTMarketplace is ERC721URIStorage {
         _transfer(address(this), msg.sender, tokenId);
 
         payable(owner).transfer(listingPrice);
-        payable(idToMarketItem[tokenId].seller).transfer(msg.value);
+        payable(owner).transfer(getOwnerShare(msg.value));
+        payable(creator).transfer(getCreatorShare(msg.value));
     }
 
     function fetchMarketItems() public view returns (MarketItem[] memory) {
@@ -128,7 +155,7 @@ contract NFTMarketplace is ERC721URIStorage {
         return items;
     }
 
-    function fetchMyNFTs() public view returns (MarketItem[] memory) {
+    function fetchMyItems() public view returns (MarketItem[] memory) {
         uint totalItemCount = _tokenIds.current();
         uint itemCount = 0;
         uint currentIndex = 0;
