@@ -1,4 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { create as ipfsHttpClient } from 'ipfs-http-client';
+
+const projectId = process.env.NEXT_PUBLIC_PROJECT_ID;
+const projectSecret = process.env.NEXT_PUBLIC_API_KEY;
+const auth = `Basic ${Buffer.from(`${projectId}:${projectSecret}`).toString('base64')}`;
+const options = { host: 'ipfs.infura.io', protocol: 'https', port: 5001, headers: { authorization: auth } };
+const client = ipfsHttpClient(options);
+const dedicatedEndPoint = process.env.NEXT_PUBLIC_END_POINT;
 
 export const NFTContext = React.createContext();
 
@@ -32,8 +40,18 @@ export const NFTProvider = ({ children }) => {
         window.location.reload();
     };
 
+    const uploadToIPFS = async (file) => {
+        try {
+            const added = await client.add({ content: file });
+
+            return `${dedicatedEndPoint}/ipfs/${added.path}`;
+        } catch (e) {
+            console.log('Error uploading file to IPFS :', e);
+        }
+    };
+
     return (
-        <NFTContext.Provider value={{ nftCurrency, connectWallet, currentAccount }}>
+        <NFTContext.Provider value={{ nftCurrency, connectWallet, currentAccount, uploadToIPFS }}>
             {children}
         </NFTContext.Provider>
     );
