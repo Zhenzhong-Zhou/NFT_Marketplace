@@ -11,7 +11,7 @@ const projectSecret = process.env.NEXT_PUBLIC_API_KEY;
 const auth = `Basic ${Buffer.from(`${projectId}:${projectSecret}`).toString('base64')}`;
 const options = { host: 'ipfs.infura.io', protocol: 'https', port: 5001, headers: { authorization: auth } };
 const client = ipfsHttpClient(options);
-const dedicatedEndPoint = process.env.NEXT_PUBLIC_END_POINT;
+const dedicatedEndPoint = `https://${process.env.NEXT_PUBLIC_END_POINT}`;
 
 const fetchContract = (signerOrProvider) => new ethers.Contract(MarketAddress, MarketAddressABI, signerOrProvider);
 
