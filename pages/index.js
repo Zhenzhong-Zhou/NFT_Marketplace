@@ -112,18 +112,6 @@ const Home = () => {
                     </div>
                     <div className="mt-3 w-full flex flex-wrap justify-start md:justify-center">
                         {nfts.map((nft) => (<NFTCard key={nft.tokenId} nft={nft} />))}
-                        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((index) => (
-                            <NFTCard
-                              key={`nft-${index}`} nft={{
-                                    index,
-                                    name: `Nifty NFT ${index}`,
-                                    price: (10 - index * 0.534).toFixed(2),
-                                    seller: `0x${makeId(3)}...${makeId(4)}`,
-                                    owner: `0x${makeId(3)}...${makeId(4)}`,
-                                    description: 'Cool NFT on Sale',
-                                }}
-                            />
-                        ))}
                     </div>
                 </div>
             </div>

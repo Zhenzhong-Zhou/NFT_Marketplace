@@ -126,7 +126,7 @@ export const NFTProvider = ({ children }) => {
 
         const contract = fetchContract(signer);
 
-        const data = type === 'fetchItemsListed' ? await contract.fetchItemsListed() : await contract.fetchMyNFTs();
+        const data = type === 'fetchItemsListed' ? await contract.fetchItemsListed() : await contract.fetchMyItems();
 
         const items = await Promise.all(data.map(async ({ tokenId, seller, owner, price: unformattedPrice }) => {
             const tokenURI = await contract.tokenURI(tokenId);
