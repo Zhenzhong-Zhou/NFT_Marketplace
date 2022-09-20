@@ -68,7 +68,7 @@ const Footer = () => {
                             <div className="mx-2 cursor-pointer" key={index}>
                                 <Image
                                   src={image} objectFit="contain" width={24} height={24} alt="social"
-                                  className={theme === 'light' ? 'filter invert' : 'undefined'}
+                                  className={theme === 'light' ? 'filter invert' : undefined}
                                 />
                             </div>
                         ))}

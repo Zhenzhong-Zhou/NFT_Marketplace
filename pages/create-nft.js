@@ -29,9 +29,9 @@ const CreateNFT = () => {
 
     const fileStyle = useMemo(() => (
         `dark:bg-nft-black-1 bg-white border dark:border-white border-nft-gray-2 flex flex-col items-center p-5 rounded-sm border-dashed 
-        ${isDragActive ? 'border-file-active' : 'undefined'}
-		${isDragAccept ? 'border-file-accept' : 'undefined'}
-        ${isDragReject ? 'border-file-reject' : 'undefined'}`
+        ${isDragActive ? 'border-file-active' : undefined}
+		${isDragAccept ? 'border-file-accept' : undefined}
+        ${isDragReject ? 'border-file-reject' : undefined}`
     ), [isDragActive, isDragAccept, isDragReject]);
 
     return (
@@ -58,7 +58,7 @@ const CreateNFT = () => {
                                 <div className="my-12 w-full flex justify-center">
                                     <Image
                                       src={images.upload} width={100} height={100} objectFit="contain"
-                                      alt="file upload" className={theme === 'light' ? 'filter invert' : 'undefined'}
+                                      alt="file upload" className={theme === 'light' ? 'filter invert' : undefined}
                                     />
                                 </div>
 

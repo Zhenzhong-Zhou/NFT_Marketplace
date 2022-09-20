@@ -23,7 +23,7 @@ const MenuItems = ({ isMobile, active, setActive }) => {
     };
 
     return (
-        <ul className={`list-none flexCenter flex-row ${isMobile ? 'flex-col h-full' : 'undefined'}`}>
+        <ul className={`list-none flexCenter flex-row ${isMobile ? 'flex-col h-full' : undefined}`}>
             {['Explore NFTs', 'Listed NFTs', 'My NFTs'].map((item, index) => (
                 // eslint-disable-next-line import/no-cycle
                 <li
@@ -116,13 +116,13 @@ const Navbar = () => {
                         <Image
                           src={images.cross} objectFit="contain" width={20} height={20} alt="close"
                           onClick={() => setIsOpen(false)}
-                          className={theme === 'light' ? 'filter invert' : 'undefined'}
+                          className={theme === 'light' ? 'filter invert' : undefined}
                         />
                     ) : (
                         <Image
                           src={images.menu} objectFit="contain" width={25} height={25} alt="menu"
                           onClick={() => setIsOpen(true)}
-                          className={theme === 'light' ? 'filter invert' : 'undefined'}
+                          className={theme === 'light' ? 'filter invert' : undefined}
                         />
                     )}
 

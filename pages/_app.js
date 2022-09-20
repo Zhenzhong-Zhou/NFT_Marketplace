@@ -17,7 +17,7 @@ const MyApp = ({ Component, pageProps }) => {
         return null;
     }
 
-    if (typeof window === 'undefined') {
+    if (typeof window === undefined) {
         return <></>;
     }
     return (
