@@ -18,14 +18,12 @@ const CreateNFT = () => {
     const onDrop = useCallback(async (acceptedFile) => {
         const url = await uploadToIPFS(acceptedFile[0]);
 
-        console.log({ url });
-
         setFileUrl(url);
     }, []);
 
     const { getRootProps, getInputProps, isDragActive, isDragAccept, isDragReject } = useDropzone({
         onDrop,
-        accept: 'image/*',
+        accept: 'image/*,audio/*,video/*',
         maxSize: 524288000,
     });
 

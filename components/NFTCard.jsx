@@ -19,7 +19,7 @@ const NFTCard = ({ nft }) => {
                 >
                     <Image
                       src={nft.image || images[`nft${nft.index}`]} layout="fill" objectFit="cover"
-                      alt={`nft${nft.index}`}
+                      alt={`nft ${nft.index}`}
                     />
                 </div>
                 <div className="mt-3 flex flex-col">
