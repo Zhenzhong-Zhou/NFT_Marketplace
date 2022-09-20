@@ -1,16 +1,28 @@
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { useTheme } from 'next-themes';
 import { Banner, CreatorCard, NFTCard } from '../components';
 
 import images from '../assets';
 import { makeId } from '../utils/makeId';
+import { NFTContext } from '../context/NFTContext';
 
 const Home = () => {
     const [hiddenButtons, setHiddenButtons] = useState(false);
+    const [nfts, setNfts] = useState([]);
     const { theme } = useTheme();
     const parentRef = useRef(null);
     const scrollRef = useRef(null);
+    const { fetchNFTs } = useContext(NFTContext);
+
+    useEffect(() => {
+        fetchNFTs().then((items) => {
+            setNfts(items);
+
+            console.log('items: ', items);
+            console.log('fetchNFTs: ', fetchNFTs);
+        });
+    }, []);
 
     const handleScroll = (direction) => {
         const { current } = scrollRef;
