@@ -8,12 +8,12 @@ import { makeId } from '../utils/makeId';
 import { NFTContext } from '../context/NFTContext';
 
 const Home = () => {
+    const { fetchNFTs } = useContext(NFTContext);
     const [hiddenButtons, setHiddenButtons] = useState(false);
     const [nfts, setNfts] = useState([]);
     const { theme } = useTheme();
     const parentRef = useRef(null);
     const scrollRef = useRef(null);
-    const { fetchNFTs } = useContext(NFTContext);
 
     useEffect(() => {
         fetchNFTs().then((items) => {
@@ -56,9 +56,9 @@ const Home = () => {
         <div className="flex justify-center sm:px-4 p-12">
             <div className="w-full minmd:w-4/5">
                 <Banner
-                  name="Discover, collect, and sell extraordinary NFTs"
-                  childStyles="md:text-4xl sm:text-2xl xs:text-xl text-left"
-                  parentStyles="justify-start mb-6 h-72 sm:h-60 p-12 xs:px-4 xs:h-44 rounded-3xl"
+                    name="Discover, collect, and sell extraordinary NFTs"
+                    childStyles="md:text-4xl sm:text-2xl xs:text-xl text-left"
+                    parentStyles="justify-start mb-6 h-72 sm:h-60 p-12 xs:px-4 xs:h-44 rounded-3xl"
                 />
 
                 <div>
@@ -68,33 +68,33 @@ const Home = () => {
 
                     <div className="relative flex-1 max-w-full flex mt-3" ref={parentRef}>
                         <div
-                          className="flex flex-row w-max overflow-x-scroll no-scrollbar select-none"
-                          ref={scrollRef}
+                            className="flex flex-row w-max overflow-x-scroll no-scrollbar select-none"
+                            ref={scrollRef}
                         >
                             {[6, 7, 8, 9, 10].map((i) => (
                                 <CreatorCard
-                                  key={`creator-${i}`} rank={i} creatorImage={images[`creator${i}`]}
-                                  creatorName={`0x${makeId(3)}...${makeId(4)}`} creatorEths={10 - i * 0.5}
+                                    key={`creator-${i}`} rank={i} creatorImage={images[`creator${i}`]}
+                                    creatorName={`0x${makeId(3)}...${makeId(4)}`} creatorEths={10 - i * 0.5}
                                 />
                             ))}
                             {!hiddenButtons && (
                                 <>
                                     <div
-                                      onClick={() => handleScroll('left')}
-                                      className="absolute w-8 h-8 minlg:w-12 minlg:h-12 top-45 cursor-pointer left-0"
+                                        onClick={() => handleScroll('left')}
+                                        className="absolute w-8 h-8 minlg:w-12 minlg:h-12 top-45 cursor-pointer left-0"
                                     >
                                         <Image
-                                          src={images.left} layout="fill" objectFit="contain" alt="left_arrow"
-                                          className={theme === 'light' ? 'filter invert' : 'undefined'}
+                                            src={images.left} layout="fill" objectFit="contain" alt="left_arrow"
+                                            className={theme === 'light' ? 'filter invert' : 'undefined'}
                                         />
                                     </div>
                                     <div
-                                      onClick={() => handleScroll('right')}
-                                      className="absolute w-8 h-8 minlg:w-12 minlg:h-12 top-45 cursor-pointer right-0"
+                                        onClick={() => handleScroll('right')}
+                                        className="absolute w-8 h-8 minlg:w-12 minlg:h-12 top-45 cursor-pointer right-0"
                                     >
                                         <Image
-                                          src={images.right} layout="fill" objectFit="contain" alt="left_arrow"
-                                          className={theme === 'light' ? 'filter invert' : 'undefined'}
+                                            src={images.right} layout="fill" objectFit="contain" alt="left_arrow"
+                                            className={theme === 'light' ? 'filter invert' : 'undefined'}
                                         />
                                     </div>
                                 </>
@@ -114,7 +114,7 @@ const Home = () => {
                         {nfts.map((nft) => (<NFTCard key={nft.tokenId} nft={nft} />))}
                         {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((index) => (
                             <NFTCard
-                              key={`nft-${index}`} nft={{
+                                key={`nft-${index}`} nft={{
                                     index,
                                     name: `Nifty NFT ${index}`,
                                     price: (10 - index * 0.534).toFixed(2),
