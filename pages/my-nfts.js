@@ -9,7 +9,7 @@ import { shortenAddress } from '../utils/shortenAddress';
 const MyNFTs = () => {
     const { fetchMyNFTsOrListedNFTs, currentAccount } = useContext(NFTContext);
     const [nfts, setNfts] = useState([]);
-    const [isLoading, setIsLoading] = useState(false); // TODO: back true
+    const [isLoading, setIsLoading] = useState(true);
 
     if (isLoading) {
         return (
