@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useTheme } from 'next-themes';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
@@ -25,7 +25,6 @@ const MenuItems = ({ isMobile, active, setActive }) => {
     return (
         <ul className={`list-none flexCenter flex-row ${isMobile ? 'flex-col h-full' : undefined}`}>
             {['Explore NFTs', 'Listed NFTs', 'My NFTs'].map((item, index) => (
-                // eslint-disable-next-line import/no-cycle
                 <li
                   key={index} onClick={() => {
                         setActive(item);
@@ -57,11 +56,35 @@ const ButtonGroup = ({ setActive, router }) => {
         );
 };
 
+const checkActive = (active, setActive, router) => {
+    switch (router.pathname) {
+    case '/':
+        if (active !== 'Explore NFTs') setActive('Explore NFTs');
+        break;
+    case '/listed-nfts':
+        if (active !== 'Listed NFTs') setActive('Listed NFTs');
+        break;
+    case '/my-nfts':
+        if (active !== 'My NFTs') setActive('My NFTs');
+        break;
+    case '/create-nft':
+        setActive('');
+        break;
+    default:
+        setActive('');
+        break;
+    }
+};
+
 const Navbar = () => {
     const { theme, setTheme } = useTheme();
     const router = useRouter();
     const [active, setActive] = useState('Explore NFTs');
     const [isOpen, setIsOpen] = useState(false);
+
+    useEffect(() => {
+        checkActive(active, setActive, router);
+    }, [router.pathname]);
 
     return (
         <nav
