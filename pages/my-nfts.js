@@ -34,6 +34,9 @@ const MyNFTs = () => {
         case 'Recently Added':
             setNfts(sortedNfts.sort((a, b) => b.tokenId - a.tokenId));
             break;
+        default:
+            setNfts(nfts);
+            break;
         }
     }, [activeSelect]);
 
@@ -76,7 +79,7 @@ const MyNFTs = () => {
                 </div>
             </div>
 
-            {!isLoading && !nfts.length && !nftsCopy ? (
+            {!isLoading && !nfts.length && !nftsCopy.length ? (
                 <div className="flexCenter sm:p-4 p-16">
                     <h1 className="font-poppins dark:text-white text-nft-black-1 font-extrabold text-3xl">
                         No NFTs Owned

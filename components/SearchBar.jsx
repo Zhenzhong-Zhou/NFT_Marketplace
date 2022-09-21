@@ -47,7 +47,7 @@ const SearchBar = ({ activeSelect, setActiveSelect, handleSearch, clearSearch })
               onClick={() => setToggle((prevState) => !prevState)}
             >
                 <p className="font-poppins dark:text-white text-nft-black-1 font-normal text-xs">
-                    Recently Listed
+                    {activeSelect}
                 </p>
                 <Image
                   src={images.arrow} objectFit="contain" width={15} height={15} alt="arrow"
