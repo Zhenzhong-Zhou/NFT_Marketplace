@@ -4,7 +4,7 @@ import { useTheme } from 'next-themes';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
-import { Button, Input } from '../components';
+import { Button, Input, Loader } from '../components';
 import images from '../assets';
 import { NFTContext } from '../context/NFTContext';
 
@@ -12,7 +12,7 @@ const CreateNFT = () => {
     const [fileUrl, setFileUrl] = useState(null);
     const [formInput, setFormInput] = useState({ name: '', description: '', price: '' });
     const { theme } = useTheme();
-    const { uploadToIPFS, createNFT } = useContext(NFTContext);
+    const { isLoadingNFT, uploadToIPFS, createNFT } = useContext(NFTContext);
     const router = useRouter();
 
     const onDrop = useCallback(async (acceptedFile) => {
@@ -33,6 +33,14 @@ const CreateNFT = () => {
 		${isDragAccept ? 'border-file-accept' : undefined}
         ${isDragReject ? 'border-file-reject' : undefined}`
     ), [isDragActive, isDragAccept, isDragReject]);
+
+    if (isLoadingNFT) {
+        return (
+            <div className="flexStart min-h-screen">
+                <Loader />
+            </div>
+        );
+    }
 
     return (
         <div className="flex justify-center sm:px-4 p-12">

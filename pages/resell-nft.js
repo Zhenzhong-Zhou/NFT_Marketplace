@@ -6,19 +6,17 @@ import { NFTContext } from '../context/NFTContext';
 import { Button, Input, Loader } from '../components';
 
 const ResellNFT = () => {
-    const { createSale } = useContext(NFTContext);
+    const { createSale, isLoadingNFT } = useContext(NFTContext);
     const router = useRouter();
     const { tokenId, tokenURI } = router.query;
     const [price, setPrice] = useState('');
     const [image, setImage] = useState('');
-    const [isLoading, setIsLoading] = useState(true);
 
     const fetchNFT = async () => {
         const { data } = await axios.get(tokenURI);
 
         setPrice(data.price);
         setImage(data.image);
-        setIsLoading(false);
     };
 
     useEffect(() => {
@@ -31,7 +29,7 @@ const ResellNFT = () => {
         await router.push('/');
     };
 
-    if (isLoading) {
+    if (isLoadingNFT) {
         return (
             <div className="flexStart min-h-screen">
                 <Loader />;
@@ -46,15 +44,15 @@ const ResellNFT = () => {
                     Resell NFT
                 </h1>
                 <Input
-                    inputType="number" title="Price" placeholder="NFT Price"
-                    handleClick={(e) => setPrice(e.target.value)}
+                  inputType="number" title="Price" placeholder="NFT Price"
+                  handleClick={(e) => setPrice(e.target.value)}
                 />
 
                 {image && <img src={image} className="rounded mt-4" width={350} alt="image_name" />}
 
                 <div className="mt-7 w-full flex justify-end">
                     <Button
-                        btnName="List NFT" classStyles="rounded-xl" handleClick={resell}
+                      btnName="List NFT" classStyles="rounded-xl" handleClick={resell}
                     />
                 </div>
             </div>
