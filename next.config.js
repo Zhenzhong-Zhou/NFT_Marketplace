@@ -3,7 +3,7 @@ const nextConfig = {
 	reactStrictMode: true,
 	swcMinify: true,
 	images: {
-		domains: 'zzz-nft-marketplace.infura-ipfs.io',
+		domains: ['zzz-nft-marketplace.infura-ipfs.io'],
 	},
 };
 
