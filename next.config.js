@@ -1,10 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    reactStrictMode: true,
-    swcMinify: true,
-    images: {
-        domains: [process.env.NEXT_PUBLIC_END_POINT],
-    },
+	reactStrictMode: true,
+	swcMinify: true,
+	images: {
+		domains: 'zzz-nft-marketplace.infura-ipfs.io',
+	},
 };
 
 module.exports = nextConfig;
