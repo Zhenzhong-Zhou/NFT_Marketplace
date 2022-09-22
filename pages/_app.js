@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Script from 'next/script';
+import Head from 'next/head';
 import { ThemeProvider } from 'next-themes';
 
 import { NFTProvider } from '../context/NFTContext';
@@ -17,12 +18,17 @@ const MyApp = ({ Component, pageProps }) => {
         return null;
     }
 
-    if (typeof window === undefined) {
+    if (typeof window === 'undefined') {
         return <></>;
     }
+
     return (
         <NFTProvider>
             <ThemeProvider attribute="class">
+                <Head>
+                    <link rel="shortcut icon" href="logo02.png" />
+                    <title>NFT Marketplace</title>
+                </Head>
                 <div className="dark:bg-nft-dark bg-white min-h-screen">
                     <Navbar />
                     <div className="pt-65">
