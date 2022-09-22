@@ -8,7 +8,7 @@ const privateKey = fs.readFileSync('.secret').toString().trim();
 module.exports = {
     networks: {
         hardhat: {
-            chainId: 1337,
+            chainId: 5,
         },
         goerli: {
             url: 'https://eth-goerli.g.alchemy.com/v2/MUDsAx5V8sG53o6rbtu55_7EbBK9TEN-',
